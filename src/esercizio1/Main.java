@@ -23,19 +23,29 @@ public class Main {
 		try {
 		do {
 			log.info("inserire valore e posizione.");
+			try {
 			n = Integer.parseInt(sc.nextLine());
+				if (n < 1 || n > 10) {
+					if (n != 0)
+						log.info("Inserire un valore compreso tra 1 e 10.");
+					continue;
+				}
 			int p = Integer.parseInt(sc.nextLine());
-			if (p < 0 || p > 4) {
-				log.warn("Posizione non corretta.");
-				continue;
-			} else {
+
+			/*
+			 * if (p < 0 || p > 4) { log.warn("Posizione non corretta."); continue; } else {
+			 */
 				try {
 				lista[p] = n;
 				log.info(Arrays.toString(lista));
 			} catch (ArrayIndexOutOfBoundsException e) {
 				log.error(e.getMessage());
 			}
-			}
+		} catch (NumberFormatException e) {
+			log.warn("Valore non valido.");
+			log.error(e.getMessage());
+		}
+			// }
 		} while (n != 0);
 	} finally {
 		sc.close();
